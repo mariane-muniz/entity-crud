@@ -1,0 +1,21 @@
+tkn task start build --showlog \
+  --prefix-name entity-crud \
+  -p repo-url=https://github.com/mariane-muniz/entity-crud \
+  -p image=docker.io/marianemuniz/entity-crud:latest \
+  -p CONTEXT=. \
+  -s pipeline
+
+tkn task start deploy --showlog \
+  --prefix-name entity-crud \
+  -p image=docker.io/marianemuniz/entity-crud:latest \
+  -p repo-url=https://github.com/mariane-muniz/entity-crud \
+  -p dir=knative \
+  -p yaml=service.yaml \
+  -s pipeline
+
+tkn pipeline start build-deploy --showlog \
+  --prefix-name entity-crud \
+  -p image=docker.io/marianemuniz/entity-crud \
+  -p CONTEXT=. \
+  -p repo-url=https://github.com/mariane-muniz/entity-crud \
+  -s pipeline
